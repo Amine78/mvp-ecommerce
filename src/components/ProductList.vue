@@ -7,7 +7,7 @@
         cols="12"
         sm="6"
         md="4"
-      >
+      ><router-link :to="{ name: 'ProductDetail', params: { id: product.id }} "  @click="selectProduct(product)">test</router-link>
         <v-card>
           <v-img
             :src="product.image"
@@ -50,12 +50,10 @@ export default {
       }
     },
     addToCart(product) {
-      console.log('Ajouter au Panier:', product);
       // old version this.cart.push(product);
       store.addToCart(product)
-      console.table(product);
     },
-  },
+  }
 };
 </script>
 

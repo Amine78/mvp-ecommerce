@@ -16,7 +16,7 @@ export default {
   name: 'ProductsAll',
   components: {
     ProductList,
-  },
+  }
 };
 </script>
 
