@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<v-app>
+    <v-app-bar app>
+      <v-toolbar-title>Carrefour</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-badge
+        :content="cart.length"
+        color="primary"
+        overlap
+      >
+        <v-icon>mdi-cart</v-icon>
+      </v-badge>
+      <v-btn text :to="{ name: 'Home' }">Home {{ cart.lenght }} </v-btn>
+      <v-btn text :to="{ name: 'Products' }">Products</v-btn>
+
+    </v-app-bar>
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { store } from '@/stores/cart.js';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  computed: {
+    cart() {
+      return store.cart;
+    }
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

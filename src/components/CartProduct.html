@@ -1,0 +1,78 @@
+<template>
+  <v-container>
+    <!-- Contenu de la page -->
+    <product-list
+      :products="products"
+      @add-to-cart="addToCart"
+    />
+    <!-- Afficher le panier avec le nombre de produits -->
+    <v-row>
+      <v-col cols="12">
+        <h2>
+          Panier
+          <!-- Badge pour afficher le nombre de produits dans le panier -->
+          <v-badge
+            :content="cart.length"
+            color="primary"
+            overlap
+          >
+            <v-icon>mdi-cart</v-icon>
+          </v-badge>
+        </h2>
+        <v-list>
+          <!-- Utilisation de v-for pour afficher les produits du panier -->
+          <v-list-item
+            v-for="(item, index) in cart"
+            :key="index"
+          >
+            <!-- Informations sur le produit -->
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-subtitle>${{ item.price }}</v-list-item-subtitle>
+            </v-list-item-content>
+            <!-- Bouton pour retirer le produit du panier -->
+            <v-list-item-action>
+              <v-btn
+                @click="removeFromCart(index)"
+                color="error"
+                text
+              >
+                Retirer
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+import { store } from '@/store';
+
+export default {
+  name: 'ProductsCart',
+  data() {
+    return {
+      productsCart: [], // Liste des produits
+      cart: store.cart, // Utilisation du store pour le panier
+    };
+  },
+  methods: {
+    // Ajouter un produit au panier
+    addToCart(productsCart) {
+      console.log('Ajouter au Panier:', productsCart);
+      store.addToCart(productsCart);
+    },
+    // Retirer un produit du panier
+    removeFromCart(index) {
+      console.log('Retirer du Panier:', this.cart[index]);
+      store.removeFromCart(index);
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* Styles */
+</style>

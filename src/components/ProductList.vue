@@ -17,7 +17,7 @@
           <v-card-subtitle>${{ product.price }}</v-card-subtitle>
           <v-card-text>{{ product.description }}</v-card-text>
           <v-card-actions>
-            <v-btn color="primary">Add to Cart</v-btn>
+            <v-btn color="primary" @click="addToCart(product)">Ajouter au Panier</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -26,11 +26,14 @@
 </template>
 
 <script>
+import { store } from '@/stores/cart.js';
+
 export default {
   name: 'ProductList',
   data() {
     return {
       products: [],
+      cart: store.cart,
     };
   },
   created() {
@@ -43,8 +46,14 @@ export default {
         const data = await response.json();
         this.products = data;
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error catching products:', error);
       }
+    },
+    addToCart(product) {
+      console.log('Ajouter au Panier:', product);
+      // old version this.cart.push(product);
+      store.addToCart(product)
+      console.table(product);
     },
   },
 };
@@ -53,5 +62,8 @@ export default {
 <style scoped>
 .v-card {
   margin-bottom: 20px;
+}
+.v-card-text{
+  min-height:170px;
 }
 </style>    
