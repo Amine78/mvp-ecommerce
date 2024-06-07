@@ -8,7 +8,7 @@
         sm="6"
         md="4"
       >
-        <v-card>
+        <v-card hover class="pa-3 items">
           <v-img
             :src="product.image"
             height="200px"
@@ -16,8 +16,10 @@
           <v-card-title>{{ product.title }}</v-card-title>
           <v-card-subtitle>${{ product.price }}</v-card-subtitle>
           <v-card-text>{{ product.description }}</v-card-text>
-          <v-card-actions>
-            <v-btn color="primary" @click="addToCart(product)">Ajouter au Panier</v-btn>
+          <v-card-actions class="btn-action">
+            <v-btn color="primary" @click="addToCart(product)" variant="tonal" >Ajouter au Panier</v-btn>
+            <v-btn color="pink" class="align-left" @click="addToFav(product)" variant="tonal" >Ajouter aux Favoris</v-btn>
+            <v-btn color="secondary" class="align-left"  variant="tonal" :to="{ name: 'ProductDetail', params: { id: product.id }} ">Détails</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -27,6 +29,7 @@
 
 <script>
 import { store } from '@/stores/cart.js';
+import { fav }from '@/stores/fav.js';
 
 export default {
   name: 'ProductList',
@@ -50,12 +53,14 @@ export default {
       }
     },
     addToCart(product) {
-      console.log('Ajouter au Panier:', product);
       // old version this.cart.push(product);
       store.addToCart(product)
-      console.table(product);
     },
-  },
+    addToFav(product) {
+      // old version this.cart.push(product);
+      fav.addToFav(product)
+    },
+  }
 };
 </script>
 
@@ -65,5 +70,12 @@ export default {
 }
 .v-card-text{
   min-height:170px;
+}
+.items{
+  text-decoration: none;
+  padding: 10px;
+}
+.btn-action{
+  z-index: 900;
 }
 </style>    
