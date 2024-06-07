@@ -1,7 +1,11 @@
 <template>
 <v-app>
     <v-app-bar app>
-      <v-toolbar-title>Carrefour</v-toolbar-title>
+        <v-btn icon :to="{ name: 'Home' }">
+          <v-icon>
+            <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/3/3b/Logo_Carrefour.svg/langfr-140px-Logo_Carrefour.svg.png" alt="Carrefour" width="24" height="24" />
+          </v-icon>
+        </v-btn>
       <v-spacer></v-spacer>
       <v-icon>mdi-cart</v-icon>
 
